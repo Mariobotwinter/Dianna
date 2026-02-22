@@ -1,17 +1,24 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import "./styles/theme.css";
+import "./styles/global.css";
 
-function App() {
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Services from "./components/Services";
+import Gallery from "./components/Gallery";
+import ReviewsSlider from "./components/ReviewsSlider";
+import WhatsAppCTA from "./components/WhatsAppCTA";
+import Footer from "./components/Footer";
+
+export default function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <>
+      <Header />
+      <Hero />
+      <Services />
+      <Gallery />
+      <ReviewsSlider />
+      <Footer />
+      <WhatsAppCTA />
+    </>
   );
 }
-
-export default App;
