@@ -1,0 +1,79 @@
+/* ===============================
+   THEME (Single Source of Truth)
+   Premium feminine + readable
+================================ */
+
+:root{
+  /* Fonts */
+  --font-primary: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-secondary: 'Montserrat', 'Inter', -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Dark-luxe base */
+  --bg-0:#0b0610;
+  --bg-1:#14081f;
+  --bg-2:#22102a;
+  --bg-3:#2f1230;
+
+  /* Accents */
+  --accent-0:#ffd6e7;   /* very light blush */
+  --accent-1:#ff9ec8;   /* rose */
+  --accent-2:#d85a9b;   /* deep rose */
+  --gold-0:#f7d7a5;
+
+  /* Text (readability first) */
+  --text-on-dark: rgba(255,245,252,0.96);
+  --text-1: rgba(255,245,252,0.92); /* headings */
+  --text-2: rgba(255,245,252,0.78); /* body */
+  --text-3: rgba(255,245,252,0.60); /* muted */
+
+  /* Surfaces (glass cards) */
+  --surface-0: rgba(255,255,255,0.06);
+  --surface-1: rgba(255,255,255,0.09);
+  --surface-2: rgba(255,255,255,0.13);
+
+  /* Borders */
+  --border-1: rgba(255,255,255,0.10);
+  --border-2: rgba(255,179,209,0.22);
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 34px;
+
+  /* Spacing */
+  --spacing-xs: 10px;
+  --spacing-sm: 14px;
+  --spacing-md: 20px;
+  --spacing-lg: 28px;
+  --spacing-xl: 44px;
+  --spacing-2xl: 72px;
+
+  /* Shadows */
+  --shadow-sm: 0 10px 30px rgba(0,0,0,0.35);
+  --shadow-md: 0 16px 44px rgba(0,0,0,0.45);
+  --shadow-lg: 0 22px 68px rgba(0,0,0,0.55);
+
+  /* Text shadow (for readability on gradients/images) */
+  --text-shadow-soft: 0 1px 10px rgba(0,0,0,.28);
+  --text-shadow-strong: 0 2px 18px rgba(0,0,0,.45);
+
+  /* Page gradient (FULL SITE) */
+  --gradient-page:
+    radial-gradient(1100px 700px at 12% 10%, rgba(255, 158, 200, 0.22), transparent 55%),
+    radial-gradient(900px 600px at 85% 12%, rgba(247, 215, 165, 0.10), transparent 60%),
+    radial-gradient(1100px 800px at 70% 85%, rgba(216, 90, 155, 0.16), transparent 55%),
+    linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 28%, var(--bg-2) 62%, var(--bg-0) 100%);
+
+  /* Buttons */
+  --btn-gradient: linear-gradient(135deg, rgba(255, 158, 200, 0.22), rgba(216, 90, 155, 0.18));
+  --btn-shadow: 0 0 0 1px rgba(255, 179, 209, 0.18), 0 18px 55px rgba(255, 123, 184, 0.14);
+
+  /* WhatsApp */
+  --wa-0:#25D366;
+  --wa-1:#128C7E;
+  --btn-whatsapp: linear-gradient(135deg, var(--wa-0), var(--wa-1));
+}
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
