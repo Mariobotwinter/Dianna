@@ -1,36 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { MessageCircle } from 'lucide-react';
-import { getWhatsAppLink } from '../config';
-import '../styles/WhatsAppCTA.css';
+import React from "react";
+import "../styles/WhatsAppCTA.css";
 
-const WhatsAppCTA = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const WHATSAPP_URL =
+  "https://wa.me/40XXXXXXXXX?text=Buna%2C%20vreau%20o%20programare%20%F0%9F%92%85";
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
+export default function WhatsAppCTA() {
   return (
-    <a
-      href={getWhatsAppLink()}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`whatsapp-floating ${isVisible ? 'visible' : ''}`}
-      aria-label="Contact pe WhatsApp"
-    >
-      <MessageCircle size={28} />
-      <span className="whatsapp-tooltip">Scrie-mi pe WhatsApp</span>
+    <a className="wa-float" href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+      <span className="wa-dot" />
+      WhatsApp
     </a>
   );
-};
-
-export default WhatsAppCTA;
+}
