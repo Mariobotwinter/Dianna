@@ -1,55 +1,38 @@
-import React from 'react';
-import { Button } from './ui/button';
-import { MessageCircle } from 'lucide-react';
-import { services } from '../data/services';
-import { getWhatsAppLink } from '../config';
-import '../styles/Services.css';
+import React from "react";
+import "../styles/Services.css";
 
-const Services = () => {
+export default function Services() {
+  const items = [
+    { title: "Construcție cu gel", desc: "Rezistență, formă corectă, apex frumos, finisaj premium." },
+    { title: "Întreținere", desc: "Refacere aspect + echilibrare pentru un look fresh, fără compromis." },
+    { title: "Tips reutilizabili", desc: "Rapid, curat, ideal pentru lungimi controlate și confort." },
+    { title: "Design / French / Babyboomer", desc: "Design fin, elegant sau modern – în funcție de stilul tău." },
+  ];
+
   return (
-    <section id="servicii" className="services-section">
+    <section className="services" id="servicii">
       <div className="container">
-        <div className="services-header">
-          <span className="section-label">Ce ofer</span>
-          <h2 className="section-title">Servicii Premium</h2>
-          <p className="section-description">
-            De la manichiură clasică la design-uri personalizate sofisticate.<br />
-            Fiecare serviciu este realizat cu atenție la detalii și produse premium.
+        <div className="services-head">
+          <span className="services-label">CE OFER</span>
+          <h2 className="services-title">Servicii premium</h2>
+          <p className="services-sub">
+            Fiecare set este făcut cu atenție la detalii, igienă și produse bune.
           </p>
         </div>
 
         <div className="services-list">
-          {services.map((service, index) => (
-            <div 
-              key={service.id} 
-              className="service-item"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="service-content">
-                <h3 className="service-title">{service.title}</h3>
-                <p className="service-description">{service.description}</p>
+          {items.map((s, idx) => (
+            <div className="services-row" key={idx}>
+              <div className="services-index">{String(idx + 1).padStart(2, "0")}</div>
+              <div className="services-body">
+                <div className="services-row-title">{s.title}</div>
+                <div className="services-row-desc">{s.desc}</div>
               </div>
-              <div className="service-divider"></div>
+              <div className="services-line" />
             </div>
           ))}
-        </div>
-
-        <div className="services-cta">
-          <p className="cta-text">
-            Tarife personalizate în funcție de complexitatea lucrării
-          </p>
-          <Button 
-            onClick={() => window.open(getWhatsAppLink('Bună! Aș dori să aflu mai multe despre servicii și tarife. 💅'), '_blank')}
-            className="services-cta-button"
-            size="lg"
-          >
-            <MessageCircle size={20} />
-            Întreabă pe WhatsApp
-          </Button>
         </div>
       </div>
     </section>
   );
-};
-
-export default Services;
+}
