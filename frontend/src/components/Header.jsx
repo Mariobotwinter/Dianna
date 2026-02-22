@@ -1,57 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import "../styles/Header.css";
 
-const WHATSAPP_URL = "https://wa.me/40XXXXXXXXX?text=Buna%20Oana%2C%20vreau%20o%20programare%20%F0%9F%92%85"; // <-- SCHIMBĂ
-
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const headerRef = useRef(null);
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close on ESC + click outside
-  useEffect(() => {
-    if (!isMobileMenuOpen) return;
-
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") setIsMobileMenuOpen(false);
-    };
-
-    const onMouseDown = (e) => {
-      if (!headerRef.current) return;
-      if (!headerRef.current.contains(e.target)) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("mousedown", onMouseDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("mousedown", onMouseDown);
-    };
-  }, [isMobileMenuOpen]);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    }
-    setIsMobileMenuOpen(false);
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = 86;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+    setOpen(false);
   };
 
-  const navItems = [
+  const items = [
     { id: "servicii", label: "Servicii" },
     { id: "galerie", label: "Galerie" },
     { id: "recenzii", label: "Recenzii" },
@@ -59,84 +30,44 @@ const Header = () => {
   ];
 
   return (
-    <header ref={headerRef} className={`header ${isScrolled ? "scrolled" : ""}`}>
-      <div className="container">
-        <div className="header-content">
-          <div
-            className="logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <span className="logo-text">Oana Ienășescu</span>
-            <span className="logo-subtitle">Nail Artist</span>
-          </div>
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+      <div className="container header-row">
+        <button
+          className="brand"
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+        >
+          <span className="brand-name">Dianna</span>
+          <span className="brand-sub">Nail Artist • Uricani</span>
+        </button>
 
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav" aria-label="Navigatie">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="nav-link"
-                type="button"
-              >
-                {item.label}
-              </button>
-            ))}
+        <nav className="nav-desktop" aria-label="Primary">
+          {items.map((i) => (
+            <button key={i.id} className="nav-link" onClick={() => scrollTo(i.id)}>
+              {i.label}
+            </button>
+          ))}
+        </nav>
 
-            {/* WhatsApp CTA */}
-            <a
-              className="nav-link whatsapp"
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Programează-te
-            </a>
-          </nav>
+        <button
+          className="nav-mobile-btn"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen((v) => !v)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-            type="button"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+      <div className={`nav-mobile ${open ? "open" : ""}`}>
+        <div className="nav-mobile-inner">
+          {items.map((i) => (
+            <button key={i.id} className="nav-mobile-link" onClick={() => scrollTo(i.id)}>
+              {i.label}
+            </button>
+          ))}
         </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <nav className="mobile-nav" aria-label="Navigatie mobila">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="mobile-nav-link"
-                type="button"
-              >
-                {item.label}
-              </button>
-            ))}
-
-            <a
-              className="mobile-nav-link whatsapp"
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Programează-te pe WhatsApp
-            </a>
-          </nav>
-        )}
       </div>
     </header>
   );
-};
-
-export default Header;
+}
