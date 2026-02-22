@@ -1,99 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { reviews } from '../data/reviews';
-import '../styles/ReviewsSlider.css';
+import React, { useMemo, useState } from "react";
+import "../styles/ReviewsSlider.css";
 
-const ReviewsSlider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+export default function ReviewsSlider() {
+  const reviews = useMemo(() => ([
+    { name: "Andreea", text: "Super atentă la detalii. Am plecat cu un set foarte curat și elegant." },
+    { name: "Bianca", text: "Igienă top, atmosferă calmă, iar forma a ieșit perfect." },
+    { name: "Diana", text: "Rezistență foarte bună și design exact cum am vrut. Revin sigur." },
+  ]), []);
 
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      nextReview();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex, isAutoPlaying]);
-
-  const nextReview = () => {
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
-  };
-
-  const prevReview = () => {
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
-
-  const goToReview = (index) => {
-    setCurrentIndex(index);
-    setIsAutoPlaying(false);
-  };
+  const [i, setI] = useState(0);
+  const prev = () => setI((v) => (v - 1 + reviews.length) % reviews.length);
+  const next = () => setI((v) => (v + 1) % reviews.length);
 
   return (
-    <section id="recenzii" className="reviews-section">
+    <section className="reviews" id="recenzii">
       <div className="container">
-        <div className="reviews-header">
-          <span className="section-label">Testimoniale</span>
-          <h2 className="section-title">Ce spun clientele</h2>
-          <p className="section-description">
-            Feedback autentic de la clientele care mi-au încredințat îngrijirea unghiilor
-          </p>
+        <div className="reviews-head">
+          <span className="reviews-label">RECENZII</span>
+          <h2 className="reviews-title">Ce spun fetele</h2>
+          <p className="reviews-sub">Feedback real, vibe bun, rezultate curate.</p>
         </div>
 
-        <div className="reviews-slider">
-          <button
-            className="slider-button slider-button-prev"
-            onClick={prevReview}
-            aria-label="Previous review"
-          >
-            <ChevronLeft size={24} />
-          </button>
+        <div className="reviews-box">
+          <button className="reviews-nav" onClick={prev} aria-label="Previous">‹</button>
 
-          <div className="reviews-track">
-            <div 
-              className="reviews-wrapper"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {reviews.map((review) => (
-                <div key={review.id} className="review-card">
-                  <div className="review-stars">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={20} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="review-text">"{review.text}"</p>
-                  <div className="review-author">
-                    <p className="author-name">{review.name}</p>
-                    <p className="author-date">{review.date}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="review">
+            <div className="review-text">“{reviews[i].text}”</div>
+            <div className="review-name">— {reviews[i].name}</div>
           </div>
 
-          <button
-            className="slider-button slider-button-next"
-            onClick={nextReview}
-            aria-label="Next review"
-          >
-            <ChevronRight size={24} />
-          </button>
+          <button className="reviews-nav" onClick={next} aria-label="Next">›</button>
         </div>
 
-        <div className="reviews-dots">
-          {reviews.map((_, index) => (
-            <button
-              key={index}
-              className={`dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => goToReview(index)}
-              aria-label={`Go to review ${index + 1}`}
-            />
+        <div className="reviews-dots" aria-hidden="true">
+          {reviews.map((_, idx) => (
+            <span key={idx} className={`dot ${idx === i ? "active" : ""}`} />
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default ReviewsSlider;
+}
