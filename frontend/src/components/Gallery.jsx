@@ -7,7 +7,7 @@ export default function Gallery() {
     () => [
       {
         title: "Lucrare 1",
-        url: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1400&q=80",
+        url: "https://i.postimg.cc/RqwcWsj3/IMG-6919.jpg",
       },
       {
         title: "Lucrare 2",
