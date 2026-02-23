@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "../styles/Hero.css";
 
-const WHATSAPP_URL =
-  "https://wa.me/40XXXXXXXXX?text=Buna%2C%20vreau%20o%20programare%20%F0%9F%92%85";
+/* DM DIRECT INSTAGRAM */
+const INSTAGRAM_DM = "https://ig.me/m/dianna_nailartist";
 
-// LINK DIRECT (safe) - se termină practic în imagine (Unsplash CDN)
+/* IMAGINE HERO */
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80";
 
@@ -13,7 +13,8 @@ export default function Hero() {
 
   return (
     <section className="hero" id="top">
-      {/* FULL BLEED IMAGE */}
+      
+      {/* BACKGROUND IMAGE */}
       <div className="hero-media" aria-hidden="true">
         {!imgError ? (
           <img
@@ -24,7 +25,6 @@ export default function Hero() {
             onError={() => setImgError(true)}
           />
         ) : (
-          // fallback dacă nu merge imaginea (să nu mai fie gol)
           <div
             className="hero-media-img"
             style={{
@@ -41,31 +41,48 @@ export default function Hero() {
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
-            <span className="hero-label">DIANNA • NAIL ARTIST • URICANI</span>
+
+            <span className="hero-label">
+              DIANNA • NAIL ARTIST • URICANI
+            </span>
 
             <h1 className="hero-title">
               Unghii <span className="hero-title-accent">premium</span>, look curat și feminin
             </h1>
 
             <p className="hero-description">
-              Construcție cu gel, tips reutilizabili și design modern. Programări rapide pe WhatsApp.
+              Construcție cu gel, tips reutilizabili și design modern.
+              Programează-te direct în DM pe Instagram.
             </p>
 
             <div className="hero-cta">
-              <a className="cta-primary" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+
+              {/* BUTON PRINCIPAL */}
+              <a
+                className="cta-primary"
+                href={INSTAGRAM_DM}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Programează-te
               </a>
 
+              {/* SCROLL GALERIE */}
               <button
                 className="cta-secondary"
                 type="button"
                 onClick={() => {
                   const el = document.getElementById("galerie");
-                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  if (el)
+                    el.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
                 }}
               >
                 Vezi lucrările
               </button>
+
             </div>
           </div>
         </div>
@@ -74,6 +91,7 @@ export default function Hero() {
       <div className="hero-scroll-indicator" aria-hidden="true">
         <span className="scroll-line" />
       </div>
+
     </section>
   );
 }
