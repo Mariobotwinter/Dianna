@@ -1,14 +1,20 @@
 import React from "react";
 import "../styles/WhatsAppCTA.css";
 
-const WHATSAPP_URL =
-  "https://wa.me/40XXXXXXXXX?text=Buna%2C%20vreau%20o%20programare%20%F0%9F%92%85";
+/* DM DIRECT INSTAGRAM */
+const INSTAGRAM_DM = "https://ig.me/m/dianna_nailartist";
 
 export default function WhatsAppCTA() {
   return (
-    <a className="wa-float" href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-      <span className="wa-dot" />
-      WhatsApp
+    <a
+      className="ig-float"
+      href={INSTAGRAM_DM}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Instagram DM"
+    >
+      <span className="ig-dot" />
+      Programează-te
     </a>
   );
 }
