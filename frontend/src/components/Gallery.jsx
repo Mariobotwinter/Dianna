@@ -4,30 +4,30 @@ import "../styles/Gallery.css";
 export default function Gallery() {
   // Pune aici ce vrei tu după. Momentan am pus poze random cu unghii (unsplash).
   const images = useMemo(
-    () => [
-      {
-        title: "Lucrare 1",
-        url: "https://i.postimg.cc/RqwcWsj3/IMG-6919.jpg",
-      },
-      {
-        title: "Lucrare 2",
-        url: "https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1400&q=80",
-      },
-      {
-        title: "Lucrare 3",
-        url: "https://images.unsplash.com/photo-1520975958225-06e6c28f57b1?auto=format&fit=crop&w=1400&q=80",
-      },
-      {
-        title: "Lucrare 4",
-        url: "https://images.unsplash.com/photo-1527799820374-dcf8a9d7a8b3?auto=format&fit=crop&w=1400&q=80",
-      },
-      {
-        title: "Lucrare 5",
-        url: "https://images.unsplash.com/photo-1512201078372-9c6b2a0d528a?auto=format&fit=crop&w=1400&q=80",
-      },
-    ],
-    []
-  );
+  () => [
+    {
+      title: "Lucrare 1",
+      url: "https://i.postimg.cc/RqwcWsj3/IMG-6919.jpg",
+    },
+    {
+      title: "Lucrare 2",
+      url: "https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1400&q=80",
+    },
+    {
+      title: "Lucrare 3",
+      url: "https://images.unsplash.com/photo-1520975958225-06e6c28f57b1?auto=format&fit=crop&w=1400&q=80",
+    },
+    {
+      title: "Lucrare 4",
+      url: "https://images.unsplash.com/photo-1527799820374-dcf8a9d7a8b3?auto=format&fit=crop&w=1400&q=80",
+    },
+    {
+      title: "Lucrare 5",
+      url: "https://images.unsplash.com/photo-1512201078372-9c6b2a0d528a?auto=format&fit=crop&w=1400&q=80",
+    },
+  ],
+  []
+);
 
   const [index, setIndex] = useState(0);
   const trackRef = useRef(null);
